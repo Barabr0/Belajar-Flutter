@@ -95,133 +95,170 @@ class Task5 extends StatelessWidget {
           ),
         ),
         Divider(),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 60),
-          child: Container(
-            width: double.infinity,
-            height: 500,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(25),
+        Expanded(
+          child : ListView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: items.length,
+            itemBuilder : (context, index) {
+              return Padding(
+                 padding: EdgeInsets.symmetric(horizontal: 60),
+              child: Container(
+                width: double.infinity,
+                height: 500,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25),
             ),
-            child: Column(
-              children: [
+            SizedBox(height: 10),
+            child : Column(
+              children : [
                 Padding(
                   padding: EdgeInsets.all(10),
                   child: Row(
-                    children: [
+                    children : [
                       CircleAvatar(
                         radius: 20,
                         backgroundImage: NetworkImage(
-                          items[0]['image']!,
+                          items[index]['image']!,
                         ),
-                      ),
+                      )
+                    ]
+                  )
+                )
+              ]
+            )
+              )
+              );
+            }
+          )
+        )
+        // Padding(
+        //   padding: EdgeInsets.symmetric(horizontal: 60),
+        //   child: Container(
+        //     width: double.infinity,
+        //     height: 500,
+        //     decoration: BoxDecoration(
+        //       color: Colors.white,
+        //       borderRadius: BorderRadius.circular(25),
+        //     ),
+        //     child: Column(
+        //       children: [
+        //         Padding(
+        //           padding: EdgeInsets.all(10),
+        //           child: Row(
+        //             children: [
+        //               CircleAvatar(
+        //                 radius: 20,
+        //                 backgroundImage: NetworkImage(
+        //                   items[0]['image']!,
+        //                 ),
+        //               ),
 
-                      SizedBox(width: 10),
+        //               SizedBox(width: 10),
 
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            items[0]['name']!,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                            ),
-                          ),
-                          Text(
-                            '2 days ago',
-                            style: TextStyle(
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ],
-                      ),
+        //               Column(
+        //                 crossAxisAlignment: CrossAxisAlignment.start,
+        //                 children: [
+        //                   Text(
+        //                     items[0]['name']!,
+        //                     style: TextStyle(
+        //                       fontWeight: FontWeight.bold,
+        //                       fontSize: 16,
+        //                     ),
+        //                   ),
+        //                   Text(
+        //                     '2 days ago',
+        //                     style: TextStyle(
+        //                       color: Colors.grey,
+        //                     ),
+        //                   ),
+        //                 ],
+        //               ),
 
-                      Spacer(),
+        //               Spacer(),
 
-                      Icon(Icons.more_horiz),
-                    ],
-                  ),
-                ),
-                Divider(),
-                Container(
-                  width: double.infinity,
-                  height: 300,
-                  child: Image.network(
-                    items[0]['image']!,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+        //               Icon(Icons.more_horiz),
+        //             ],
+        //           ),
+        //         ),
+        //         Divider(),
+        //         Container(
+        //           width: double.infinity,
+        //           height: 300,
+        //           child: Image.network(
+        //             items[0]['image']!,
+        //             fit: BoxFit.cover,
+        //           ),
+        //         ),
 
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.favorite_border,
-                        size: 28,
-                      ),
+        //         Padding(
+        //           padding: EdgeInsets.all(10),
+        //           child: Row(
+        //             children: [
+        //               Icon(
+        //                 Icons.favorite_border,
+        //                 size: 28,
+        //               ),
 
-                      SizedBox(width: 5),
+        //               SizedBox(width: 5),
 
-                      Text('103'),
+        //               Text('103'),
 
-                      SizedBox(width: 15),
+        //               SizedBox(width: 15),
 
-                      Icon(
-                        Icons.comment_outlined,
-                        size: 28,
-                      ),
+        //               Icon(
+        //                 Icons.comment_outlined,
+        //                 size: 28,
+        //               ),
 
-                      SizedBox(width: 15),
+        //               SizedBox(width: 15),
 
-                      Icon(
-                        Icons.repeat,
-                        size: 28,
-                      ),
+        //               Icon(
+        //                 Icons.repeat,
+        //                 size: 28,
+        //               ),
 
-                      SizedBox(width: 5),
+        //               SizedBox(width: 5),
 
-                      Text('3'),
+        //               Text('3'),
 
-                      SizedBox(width: 15),
+        //               SizedBox(width: 15),
 
-                      Icon(
-                        Icons.send_outlined,
-                        size: 28,
-                      ),
+        //               Icon(
+        //                 Icons.send_outlined,
+        //                 size: 28,
+        //               ),
 
-                      SizedBox(width: 5),
+        //               SizedBox(width: 5),
 
-                      Text('10'),
+        //               Text('10'),
 
-                      Spacer(),
+        //               Spacer(),
 
-                      Icon(
-                        Icons.bookmark_border,
-                        size: 28,
-                      ),
-                    ],
-                  ),
-                ),
+        //               Icon(
+        //                 Icons.bookmark_border,
+        //                 size: 28,
+        //               ),
+        //             ],
+        //           ),
+        //         ),
 
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      '${items[0]['name']} The Countdown begins.',
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        //         Padding(
+        //           padding: EdgeInsets.symmetric(horizontal: 10),
+        //           child: Align(
+        //             alignment: Alignment.centerLeft,
+        //             child: Text(
+        //               '${items[0]['name']} The Countdown begins.',
+        //               style: TextStyle(
+        //                 fontSize: 15,
+        //               ),
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
