@@ -6,32 +6,32 @@ class ArticleListScreen extends StatelessWidget {
 
   final List <Map<String,String>> articles = const [
     {
-      'title' : 'List 1',
+      'title' : 'Title 1',
       'description' : 'This is the description for List 1',
       'image' : 'https://picsum.photos/200/300?1',
     },
     {
-      'title' : 'List 2',
+      'title' : 'Title 2',
       'description' : 'This is the description for List 2',
       'image' : 'https://picsum.photos/200/300?2',
     },
     {
-      'title' : 'List 3',
+      'title' : 'Title 3',
       'description' : 'This is the description for List 3',
       'image' : 'https://picsum.photos/200/300?3',
     },
     {
-      'title' : 'List 4',
+      'title' : 'Title 4',
       'description' : 'This is the description for List 4',
       'image' : 'https://picsum.photos/200/300?4',
     },
     {
-      'title' : 'List 5',
+      'title' : 'Title 5',
       'description' : 'This is the description for List 5',
       'image' : 'https://picsum.photos/200/300?5',
     },
     {
-      'title' : 'List 6',
+      'title' : 'Title 6',
       'description' : 'This is the description for List 6',
       'image' : 'https://picsum.photos/200/300?6',
     },

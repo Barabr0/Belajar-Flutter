@@ -9,6 +9,7 @@ class ArticleDetailScreen extends StatelessWidget {
     return Center(
       child: Column(
         children: [
+          Text(data['title']!,style : const TextStyle(fontSize : 24, fontWeight : FontWeight.bold)),
           const SizedBox(height: 20),
           Image.network(data['image']!,height: 200,),
           const SizedBox(height: 20),
