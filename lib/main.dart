@@ -1,25 +1,19 @@
 
 import 'package:flutter/material.dart';
+import 'package:throught_1/Navigator.dart';
 import 'package:throught_1/Task/Task5.dart';
+import 'package:throught_1/routes/app_routes.dart';
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        // appBar: AppBar(
-        //   title: Text("Flutter App"),
-        //   backgroundColor: Colors.amber,
-        //   centerTitle: true,
-        // ),
-        body: Task5(),
-      ),
+      initialRoute : '/',
+      routes : AppRoutes.routes,
     );
   }
 }

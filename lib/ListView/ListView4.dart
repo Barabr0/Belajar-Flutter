@@ -7,13 +7,13 @@ class Listview4 extends StatelessWidget {
     'https://via.placeholder.com/150',
   ];
 
-  const Listview4({super.key});
+  // const Listview4({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: Text("ListViwe 4 / custom")),
+        appBar: AppBar(title: Text("ListView 4 / custom")),
         body: ListView.builder( 
           itemCount: images.length,
           itemBuilder: (context, index) {

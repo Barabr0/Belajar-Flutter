@@ -5,7 +5,10 @@ class ContainerSatu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return  Scaffold(
+      appBar : AppBar(),
+      body :
+    Container(
       height: double.infinity,
       width: double.infinity,
       padding: EdgeInsets.all(10),
@@ -22,6 +25,7 @@ class ContainerSatu extends StatelessWidget {
         ),
       ),
       child: Text("Lorem Ipsum sit Amet Dolor"),
-    );
+    )
+      );
   }
 }

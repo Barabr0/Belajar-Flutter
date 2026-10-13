@@ -6,16 +6,19 @@ class ArticleDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Text(data['title']!,style : const TextStyle(fontSize : 24, fontWeight : FontWeight.bold)),
-          const SizedBox(height: 20),
+    return Scaffold(
+      appBar: AppBar(),
+      body: Center(
+        child: Column(
+          children: [
+            Text(data['title']!,style : const TextStyle(fontSize : 24, fontWeight : FontWeight.bold)),
+            const SizedBox(height: 20),
           Image.network(data['image']!,height: 200,),
           const SizedBox(height: 20),
           Text(data['description']!, style: const TextStyle(fontSize: 16),),
         ],
       )
+    )
     );
   }
 }

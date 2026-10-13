@@ -28,9 +28,11 @@ class GridProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
+    return Scaffold(
+      appBar: AppBar(),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: GridView.builder(
         itemCount: products.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
@@ -109,6 +111,7 @@ class GridProductPage extends StatelessWidget {
           );
         },
       ),
+    )
     );
   }
 }
