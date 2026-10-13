@@ -50,7 +50,49 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/ContainerSatu');
               },
               child : Text('Masuk ContainerSatu'),
-            ),            
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/ColumnWidget');
+              },
+              child : Text('Masuk Column Widget'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/RowAja');
+              },
+              child : Text('Masuk Row Widget'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/RowColumnWidget');
+              },
+              child : Text('Masuk Row Column Widget'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/Stackwidget');
+              },
+              child : Text('Masuk Stack Widget'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/Expandedwidget');
+              },
+              child : Text('Masuk Expanded Widget'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/Sizedboxwidget');
+              },
+              child : Text('Masuk Sized Box Widget'),
+            ),
           ]
         )
       )
