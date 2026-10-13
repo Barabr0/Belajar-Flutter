@@ -93,6 +93,13 @@ class HomePage extends StatelessWidget {
               },
               child : Text('Masuk Sized Box Widget'),
             ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/Gridhi');
+              },
+              child : Text('Masuk Grid hi'),
+            ),
           ]
         )
       )

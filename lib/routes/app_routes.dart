@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:throught_1/Grid/GridView4.dart';
 import 'package:throught_1/ListView/Listview1.dart';
 import 'package:throught_1/Task/Task5.dart';
 import 'package:throught_1/container/ContainerSatu.dart';
@@ -27,6 +28,7 @@ class AppRoutes {
   static const ExpandedWidgetScreen = '/Expandedwidget';
   static const SizedboxWidgetScreen = '/Sizedboxwidget';
   static const StackWidgetScreen = '/Stackwidget';
+  static const GridhiScreen = '/Gridhi';
 
   static Map<String, WidgetBuilder> routes = {
     home: (context) => const HomePage(),
@@ -42,5 +44,6 @@ class AppRoutes {
     ExpandedWidgetScreen: (context) => Expandedwidget(),
     SizedboxWidgetScreen: (context) => Sizedboxwidget(),
     StackWidgetScreen: (context) => Stackwidget(),
+    GridhiScreen: (context) => Gridhi(),
   };
 }

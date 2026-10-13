@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class Gridview4 extends StatelessWidget {
-  const Gridview4({super.key});
+class Gridhi extends StatelessWidget {
+  const Gridhi({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+    return 
+       Scaffold(
         appBar: AppBar(title: const Text("Grid 4 / image")),
         body: GridView.builder(
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -29,7 +29,6 @@ class Gridview4 extends StatelessWidget {
             );
           },
         ),
-      ),
     );
   }
 }
