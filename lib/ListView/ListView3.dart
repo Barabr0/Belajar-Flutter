@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class Listview3 extends StatelessWidget {
   final List<String> items = List.generate(10, (index) => 'Item ${index + 1}');
 
+  Listview3({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

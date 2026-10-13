@@ -1,18 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:throught_1/Grid/GridView2.dart';
-import 'package:throught_1/Grid/GridView3.dart';
-import 'package:throught_1/Grid/GridView4.dart';
-import 'package:throught_1/Grid/Gridview1.dart';
-import 'package:throught_1/ListView/ListView2.dart';
-import 'package:throught_1/ListView/ListView3.dart';
-import 'package:throught_1/ListView/ListView4.dart';
-import 'package:throught_1/ListView/ListView5.dart';
-import 'package:throught_1/ListView/Listview1.dart';
 import 'package:throught_1/Task/Task5.dart';
-import 'package:throught_1/Task/task4.dart';
-import 'package:throught_1/HomePage/Homepage.dart';
-import 'package:throught_1/list%20&%20Grid/list-screen.dart';
 void main() {
   runApp(const MyApp());
 }
