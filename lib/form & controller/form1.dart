@@ -13,7 +13,7 @@ class _FormulirState extends State<Formulir> {
   final TextEditingController _formNamaController = TextEditingController();
   
   DateTime? selectedDate;
-  String? _pilihanSeks = 'Laki-laki';
+  String? _pilihanKelamin = 'Laki-laki';
   String _pilihAgama = "";
 
   String _outputNama = '';
@@ -41,7 +41,7 @@ class _FormulirState extends State<Formulir> {
     setState(() {
       _outputNama = _formNamaController.text;
       _outputTanggal = selectedDate;
-      _outputGender = _pilihanSeks ?? '-';
+      _outputGender = _pilihanKelamin ?? '-';
       _outputAlamat = _formAlamatController.text;
       _outputAgama = _pilihAgama; 
     });
@@ -58,14 +58,14 @@ class _FormulirState extends State<Formulir> {
     
     setState(() {
       selectedDate = null;
-      _pilihanSeks = 'Laki-laki';
+      _pilihanKelamin = 'Laki-laki';
       _pilihAgama = '';
     });
   }
 
   void _handleRadioValueChange(String? value) {
     setState(() {
-      _pilihanSeks = value;
+      _pilihanKelamin = value;
     });
   }
 
@@ -126,13 +126,13 @@ class _FormulirState extends State<Formulir> {
                 RadioListTile<String>(
                   title: const Text('Laki-laki'),
                   value: 'Laki-laki',
-                  groupValue: _pilihanSeks,
+                  groupValue: _pilihanKelamin,
                   onChanged: _handleRadioValueChange,
                 ),
                 RadioListTile<String>(
                   title: const Text('Perempuan'),
                   value: 'Perempuan',
-                  groupValue: _pilihanSeks,
+                  groupValue: _pilihanKelamin,
                   onChanged: _handleRadioValueChange,
                 ),
                 const SizedBox(height: 10),
@@ -140,7 +140,7 @@ class _FormulirState extends State<Formulir> {
                   controller: _formAlamatController,
                   maxLines: 3, 
                   minLines: 3,
-                  keyboardType: TextInputType.multiline,
+                  // keyboardType: TextInputType.multiline,
                   decoration: const InputDecoration(
                     labelText: 'Alamat',
                     hintText: 'Masukkan alamat rumah...',
