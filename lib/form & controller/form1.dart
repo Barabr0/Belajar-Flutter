@@ -11,16 +11,24 @@ class _FormulirState extends State<Formulir> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController _formAlamatController = TextEditingController();
   final TextEditingController _formNamaController = TextEditingController();
-
   
   DateTime? selectedDate;
-  String? _pilihanSeks = 'Laki-laki'; 
+  String? _pilihanSeks = 'Laki-laki';
+  String _pilihAgama = "";
 
   String _outputNama = '';
   DateTime? _outputTanggal;
   String _outputGender = '';
   String _outputAlamat = '';
+  String _outputAgama = ''; 
 
+  final List<String> agama = [
+    "Islam",
+    "Protestan",
+    "Katholik",
+    "Budha",
+    "Atheis",
+  ];
 
   @override
   void dispose() {
@@ -31,24 +39,28 @@ class _FormulirState extends State<Formulir> {
 
   void _submitForm() {
     setState(() {
-      
       _outputNama = _formNamaController.text;
       _outputTanggal = selectedDate;
       _outputGender = _pilihanSeks ?? '-';
       _outputAlamat = _formAlamatController.text;
+      _outputAgama = _pilihAgama; 
     });
 
-
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Data berhasil disimpan!')),
+      const SnackBar(content: Text('Data berhasil disimpan!')),
     );
-
     _clearInput();
   }
-  
+
   void _clearInput() {
-    _formAlamatController.clear();
     _formNamaController.clear();
+    _formAlamatController.clear();
+    
+    setState(() {
+      selectedDate = null;
+      _pilihanSeks = 'Laki-laki';
+      _pilihAgama = '';
+    });
   }
 
   void _handleRadioValueChange(String? value) {
@@ -61,9 +73,8 @@ class _FormulirState extends State<Formulir> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Formulir Biodata')),
-      body: Center( 
+      body: SingleChildScrollView( 
         child: Padding(
-          
           padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
@@ -94,14 +105,13 @@ class _FormulirState extends State<Formulir> {
                           firstDate: DateTime(2000),
                           lastDate: DateTime(2030),
                         );
-
                         if (date != null) {
                           setState(() {
                             selectedDate = date;
                           });
                         }
                       },
-                      child: const Text('Pilih Tanggal'),                  
+                      child: const Text('Pilih Tanggal'),
                     ),
                     const SizedBox(width: 10),
                     Text(
@@ -112,40 +122,64 @@ class _FormulirState extends State<Formulir> {
                   ],
                 ),
                 const SizedBox(height: 15),
-
-                
                 const Text('Jenis Kelamin:', style: TextStyle(fontWeight: FontWeight.bold)),
                 RadioListTile<String>(
                   title: const Text('Laki-laki'),
                   value: 'Laki-laki',
                   groupValue: _pilihanSeks,
-                  onChanged: _handleRadioValueChange, 
+                  onChanged: _handleRadioValueChange,
                 ),
                 RadioListTile<String>(
                   title: const Text('Perempuan'),
                   value: 'Perempuan',
                   groupValue: _pilihanSeks,
-                  onChanged: _handleRadioValueChange, 
+                  onChanged: _handleRadioValueChange,
                 ),
                 const SizedBox(height: 10),
-              TextFormField(
-              controller: _formAlamatController,
-              maxLines: 5, 
-              minLines: 5, 
-              keyboardType: TextInputType.multiline, 
-              decoration: InputDecoration(
-                hintText: 'Enter your text here...',
-                border: OutlineInputBorder(), 
-              ),
-              validator: (value) {
+                TextFormField(
+                  controller: _formAlamatController,
+                  maxLines: 3, 
+                  minLines: 3,
+                  keyboardType: TextInputType.multiline,
+                  decoration: const InputDecoration(
+                    labelText: 'Alamat',
+                    hintText: 'Masukkan alamat rumah...',
+                    border: OutlineInputBorder(),
+                  ),
+                  validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Alamat tidak boleh kosong';
                     }
                     return null;
-                },
-            ),
+                  },
+                ),
                 const SizedBox(height: 10),
-                
+                DropdownButtonFormField<String>(
+                  decoration: const InputDecoration(
+                    labelText: "Pilih Agama",
+                    border: OutlineInputBorder(),
+                  ),
+                  items: agama
+                      .map(
+                        (item) => DropdownMenuItem(
+                          value: item,
+                          child: Text(item),
+                        ),
+                      )
+                      .toList(),
+                  onChanged: (value) {
+                    setState(() {
+                      _pilihAgama = value ?? '';
+                    });
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Pilih agama';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 15),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -154,15 +188,14 @@ class _FormulirState extends State<Formulir> {
                         _submitForm();
                       }
                     },
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.blue, width: 2),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.blue,
+                      foregroundColor: Colors.white,
                     ),
                     child: const Text('Simpan'),
                   ),
                 ),
                 const SizedBox(height: 20),
-
-                
                 const Divider(thickness: 2),
                 const Text(
                   "Biodata Terhitung:",
@@ -171,20 +204,22 @@ class _FormulirState extends State<Formulir> {
                 const SizedBox(height: 10),
                 Text(
                   'Nama Lengkap : ${_outputNama.isEmpty ? '-' : _outputNama}',
-                  style: const TextStyle(fontSize: 16), 
-                ),
-                Text(
-                  'Tanggal Lahir : ${_outputTanggal == null ? '-' : 
-                  "${_outputTanggal!.day}-${_outputTanggal!.month}-${_outputTanggal!.year}"}',
                   style: const TextStyle(fontSize: 16),
                 ),
-                
+                Text(
+                  'Tanggal Lahir : ${_outputTanggal == null ? '-' : "${_outputTanggal!.day}-${_outputTanggal!.month}-${_outputTanggal!.year}"}',
+                  style: const TextStyle(fontSize: 16),
+                ),
                 Text(
                   'Kelamin : ${_outputGender.isEmpty ? '-' : _outputGender}',
                   style: const TextStyle(fontSize: 16),
                 ),
                 Text(
                   'Alamat : ${_outputAlamat.isEmpty ? '-' : _outputAlamat}',
+                  style: const TextStyle(fontSize: 16),
+                ),
+                Text(
+                  'Agama : ${_outputAgama.isEmpty ? '-' : _outputAgama}', 
                   style: const TextStyle(fontSize: 16),
                 ),
               ],
