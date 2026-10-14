@@ -86,19 +86,26 @@ class HomePage extends StatelessWidget {
               },
               child : Text('Masuk Expanded Widget'),
             ),
+            // SizedBox(height: 20),
+            // ElevatedButton(
+            //   onPressed :() {
+            //     Navigator.pushNamed(context, '/Sizedboxwidget');
+            //   },
+            //   child : Text('Masuk Sized Box Widget'),
+            // ),
+            // SizedBox(height: 20),
+            // ElevatedButton(
+            //   onPressed :() {
+            //     Navigator.pushNamed(context, '/Gridhi');
+            //   },
+            //   child : Text('Masuk Grid hi'),
+            // ),
             SizedBox(height: 20),
             ElevatedButton(
               onPressed :() {
-                Navigator.pushNamed(context, '/Sizedboxwidget');
+                Navigator.pushNamed(context, '/formulir');
               },
-              child : Text('Masuk Sized Box Widget'),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed :() {
-                Navigator.pushNamed(context, '/Gridhi');
-              },
-              child : Text('Masuk Grid hi'),
+              child : Text('Masuk Formulir'),
             ),
           ]
         )

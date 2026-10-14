@@ -3,6 +3,7 @@ import 'package:throught_1/Grid/GridView4.dart';
 import 'package:throught_1/ListView/Listview1.dart';
 import 'package:throught_1/Task/Task5.dart';
 import 'package:throught_1/container/ContainerSatu.dart';
+import 'package:throught_1/form%20&%20controller/form1.dart';
 import 'package:throught_1/list%20&%20Grid/Grid.dart';
 import 'package:throught_1/list%20&%20Grid/list_screen.dart';
 import 'package:throught_1/pages/About.dart';
@@ -29,6 +30,7 @@ class AppRoutes {
   static const SizedboxWidgetScreen = '/Sizedboxwidget';
   static const StackWidgetScreen = '/Stackwidget';
   static const GridhiScreen = '/Gridhi';
+  static const formulir = '/formulir';
 
   static Map<String, WidgetBuilder> routes = {
     home: (context) => const HomePage(),
@@ -45,5 +47,6 @@ class AppRoutes {
     SizedboxWidgetScreen: (context) => Sizedboxwidget(),
     StackWidgetScreen: (context) => Stackwidget(),
     GridhiScreen: (context) => Gridhi(),
+    formulir: (context) => const Formulir(),
   };
 }

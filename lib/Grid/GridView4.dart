@@ -21,7 +21,7 @@ class Gridhi extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 image: DecorationImage(
                   image: NetworkImage(
-                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjR8D4uxOZDle8V77TvmkYid8fuiKs2NzL4EiE4o4Gvg&s=10',
+                    'https://k-tbn0.gstatic.com/images?q=tbn:ANd9GcSjR8D4uxOZDle8V77TvmkYid8fuiKs2NzL4EiE4o4Gvg&s=10',
                   ),
                   fit: BoxFit.cover,
                 ),
