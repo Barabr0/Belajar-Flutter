@@ -23,13 +23,13 @@ class HomePage extends StatelessWidget {
                 },
                 child : Text('Masuk Listview'),
             ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed :() {
-                Navigator.pushNamed(context, '/task5');
-              },
-              child : Text('Masuk Task 5'),
-            ),          
+            // SizedBox(height: 20),
+            // ElevatedButton(
+            //   onPressed :() {
+            //     Navigator.pushNamed(context, '/task5');
+            //   },
+            //   child : Text('Masuk Task 5'),
+            // ),          
             SizedBox(height: 20),
             ElevatedButton(
               onPressed :() {
@@ -106,6 +106,20 @@ class HomePage extends StatelessWidget {
                 Navigator.pushNamed(context, '/formulir');
               },
               child : Text('Masuk Formulir'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/BelajarForm');
+              },
+              child : Text('Masuk Formulir 2'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed :() {
+                Navigator.pushNamed(context, '/EskulForm');
+              },
+              child : Text('Daftar Eskul'),
             ),
           ]
         )
