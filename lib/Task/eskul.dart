@@ -101,7 +101,7 @@ class _EskulFormState extends State<EskulForm> {
                       const SizedBox(height: 18),
                       TextFormField(
                         controller: nomorController,
-                        keyboardType: TextInputType.number,
+                        keyboardType: TextInputType.numberWithOptions(),
                         inputFormatters: [maskFormatter],
                         decoration: InputDecoration(
                           hintText: "Nomor Telepon",
@@ -115,48 +115,17 @@ class _EskulFormState extends State<EskulForm> {
                       const SizedBox(height: 18),
                        TextFormField(
                         keyboardType: TextInputType.emailAddress,
+                        
                         controller: emailController,
                         decoration: InputDecoration(
                           hintText: "Email",
                           border: OutlineInputBorder(),
                         ),
                         validator: (value) {
-                          if (value!.isEmpty) return 'Input Email';
+                          if (value!.isEmpty || !value.contains("@") || !value.contains(".com")) return 'Input Email dengan benar';
                           return null;
                         },
                       ),
-                      const SizedBox(height: 18),
-
-                      TextFormField(
-                        controller: tglDaftarController,
-                        decoration: InputDecoration(
-                          hintText: "Tanggal Daftar",
-                          border: OutlineInputBorder(),
-                        ),
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Input Tanggal Lahir';
-                          }
-                          return null;
-                        },
-                        readOnly: true,
-                        onTap: () async {
-                          DateTime? pickedDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                          );
-
-                          if (pickedDate != null) {
-                            setState(() {
-                              tglDaftarController.text = DateFormat('yyyy-MM-dd')
-                                  .format(pickedDate);
-                            });
-                          }
-                        },
-                      ),
-
                       const SizedBox(height: 18),
 
                       DropdownButtonFormField<String>(
@@ -187,6 +156,14 @@ class _EskulFormState extends State<EskulForm> {
 
                       const SizedBox(height: 24),
 
+                      Text(
+                        "Eskul (Maximal 2)",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      
                       ...eskul.keys.map((key) {
                         return CheckboxListTile(
                           title: Text(key),
@@ -212,6 +189,37 @@ class _EskulFormState extends State<EskulForm> {
 
                       const SizedBox(height: 24),
 
+                       TextFormField(
+                        controller: tglDaftarController,
+                        decoration: InputDecoration(
+                          hintText: "Tanggal Daftar",
+                          border: OutlineInputBorder(),
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Input Tanggal Lahir';
+                          }
+                          return null;
+                        },
+                        readOnly: true,
+                        onTap: () async {
+                          DateTime? pickedDate = await showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                          );
+
+                          if (pickedDate != null) {
+                            setState(() {
+                              tglDaftarController.text = DateFormat('yyyy-MM-dd')
+                                  .format(pickedDate);
+                            });
+                          }
+                        },
+                      ),
+
+                      const SizedBox(height: 18),
                       SizedBox(
                         width: displayWidth(context) * 0.8,
                         height: displayHeight(context) * 0.075,
