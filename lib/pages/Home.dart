@@ -11,19 +11,19 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/about');
-                },
-                child: Text('Masuk Profile'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/listview1');
-                },
-                child: Text('Masuk Listview'),
-              ),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/about');
+              //   },
+              //   child: Text('Masuk Profile'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/listview1');
+              //   },
+              //   child: Text('Masuk Listview'),
+              // ),
               // SizedBox(height: 20),
               // ElevatedButton(
               //   onPressed :() {
@@ -31,62 +31,62 @@ class HomePage extends StatelessWidget {
               //   },
               //   child : Text('Masuk Task 5'),
               // ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/ArticleListScreen');
-                },
-                child: Text('Masuk Article List'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/GridProductPage');
-                },
-                child: Text('Masuk Grid List'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/ContainerSatu');
-                },
-                child: Text('Masuk ContainerSatu'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/ColumnWidget');
-                },
-                child: Text('Masuk Column Widget'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/RowAja');
-                },
-                child: Text('Masuk Row Widget'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/RowColumnWidget');
-                },
-                child: Text('Masuk Row Column Widget'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/Stackwidget');
-                },
-                child: Text('Masuk Stack Widget'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/Expandedwidget');
-                },
-                child: Text('Masuk Expanded Widget'),
-              ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/ArticleListScreen');
+              //   },
+              //   child: Text('Masuk Article List'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/GridProductPage');
+              //   },
+              //   child: Text('Masuk Grid List'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/ContainerSatu');
+              //   },
+              //   child: Text('Masuk ContainerSatu'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/ColumnWidget');
+              //   },
+              //   child: Text('Masuk Column Widget'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/RowAja');
+              //   },
+              //   child: Text('Masuk Row Widget'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/RowColumnWidget');
+              //   },
+              //   child: Text('Masuk Row Column Widget'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/Stackwidget');
+              //   },
+              //   child: Text('Masuk Stack Widget'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/Expandedwidget');
+              //   },
+              //   child: Text('Masuk Expanded Widget'),
+              // ),
               // SizedBox(height: 20),
               // ElevatedButton(
               //   onPressed :() {
@@ -101,35 +101,41 @@ class HomePage extends StatelessWidget {
               //   },
               //   child : Text('Masuk Grid hi'),
               // ),
-              SizedBox(height: 20),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/formulir');
+              //   },
+              //   child: Text('Masuk Formulir'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/BelajarForm');
+              //   },
+              //   child: Text('Masuk Formulir 2'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/EskulForm');
+              //   },
+              //   child: Text('Daftar Eskul'),
+              // ),
+              // SizedBox(height: 20),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.pushNamed(context, '/Cinema');
+              //   },
+              //   child: Text('Cinema'),
+              // ),
+              // SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/formulir');
+                  Navigator.pushNamed(context, '/Api-comment');
                 },
-                child: Text('Masuk Formulir'),
+                child: Text('Comment'),
               ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/BelajarForm');
-                },
-                child: Text('Masuk Formulir 2'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/EskulForm');
-                },
-                child: Text('Daftar Eskul'),
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/Cinema');
-                },
-                child: Text('Cinema'),
-              ),
-              SizedBox(height: 20),
             ],
           ),
         ),

@@ -17,11 +17,13 @@ import 'package:throught_1/pages/Home.dart';
 import 'package:throught_1/form2/form2.dart';
 import 'package:throught_1/Task/eskul.dart';
 import 'package:throught_1/cinema/homepage.dart';
+import 'package:throught_1/pages/fetch_api_page.dart';
+import 'package:throught_1/pages/comment_page.dart';
 
 class AppRoutes {
-  static const home = '/';
-  static const list = '/listview1';
-  static const about = '/about';
+  // static const home = '/';
+  // static const list = '/listview1';
+  // static const about = '/about';
   //  static const IG = '/task5';
   // static const listScreen = '/ArticleListScreen';
   // static const GridScreen = '/GridProductPage';
@@ -37,10 +39,12 @@ class AppRoutes {
   static const form2 = '/BelajarForm';
   static const task6 = '/EskulForm';
   static const cinema = '/Cinema';
+  static const api = '/Api';
+  static const comment = '/Api-comment';
 
   static Map<String, WidgetBuilder> routes = {
-    home: (context) => const HomePage(),
-    list: (context) => const Listview1(),
+    // home: (context) => const HomePage(),
+    // list: (context) => const Listview1(),
     // about: (context) => const AboutPage(),
     // IG: (context) =>  Task5(),
     // listScreen: (context) => const ArticleListScreen(),
@@ -57,5 +61,7 @@ class AppRoutes {
     form2: (context) => const BelajarForm(),
     task6: (context) => const EskulForm(),
     cinema: (context) => const CinemaHomePage(),
+    api: (context) => const AlbumPage(),
+    comment: (context) => const Commentpage(),
   };
 }

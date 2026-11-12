@@ -24,6 +24,21 @@ class _CinemaHomePageState extends State<CinemaHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       appBar: AppBar(
+    backgroundColor: Colors.transparent,
+    elevation: 0,
+    centerTitle: false,   
+    titleSpacing: 24,     
+    toolbarHeight: 48,    
+    title: const Text(
+      'MyCinema',
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: kRed,
+      ),
+    ),
+  ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
