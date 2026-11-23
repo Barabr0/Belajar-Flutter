@@ -19,6 +19,8 @@ import 'package:throught_1/Task/eskul.dart';
 import 'package:throught_1/cinema/homepage.dart';
 import 'package:throught_1/pages/fetch_api_page.dart';
 import 'package:throught_1/pages/comment_page.dart';
+import '../pages/login_page.dart';
+import '../pages/register_page.dart';
 
 class AppRoutes {
   // static const home = '/';
@@ -35,12 +37,14 @@ class AppRoutes {
   // static const SizedboxWidgetScreen = '/Sizedboxwidget';
   // static const StackWidgetScreen = '/Stackwidget';
   // static const GridhiScreen = '/Gridhi';
-  static const formulir = '/formulir';
-  static const form2 = '/BelajarForm';
+  // static const formulir = '/formulir';
+  // static const form2 = '/BelajarForm';
   static const task6 = '/EskulForm';
   static const cinema = '/Cinema';
-  static const api = '/Api';
-  static const comment = '/Api-comment';
+  // static const api = '/Api';
+  // static const comment = '/Api-comment';
+  static const login = '/login';
+  static const regis = '/regis';
 
   static Map<String, WidgetBuilder> routes = {
     // home: (context) => const HomePage(),
@@ -58,10 +62,12 @@ class AppRoutes {
     // StackWidgetScreen: (context) => Stackwidget(),
     // GridhiScreen: (context) => Gridhi(),
     // formulir: (context) => const Formulir(),
-    form2: (context) => const BelajarForm(),
+    // form2: (context) => const BelajarForm(),
     task6: (context) => const EskulForm(),
     cinema: (context) => const CinemaHomePage(),
-    api: (context) => const AlbumPage(),
-    comment: (context) => const Commentpage(),
+    login: (context) => const LoginPage(),
+    regis: (context) => const RegisterPage(),
+    // api: (context) => const AlbumPage(),
+    // comment: (context) => const Commentpage(),
   };
 }
