@@ -2,7 +2,7 @@ class ApiConstants {
   // static const  String baseUrl = 'https://jsonplaceholder.typicode.com';
   // static const  String postsEndpoint = '/posts';
 
-  static const String baseUrl = 'http://10.10.11.163:8000/api';
+  static const String baseUrl = 'http://192.168.1.9:8000/api';
 
   static const String register = '$baseUrl/register';
   static const String login = '$baseUrl/login';

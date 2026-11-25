@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'api_exception.dart';
@@ -19,7 +20,6 @@ class ApiClient {
   }
 
   // ---------------- REQUEST JSON (surat) ----------------
-  /// [method] = 'GET' | 'POST' | 'PUT' | 'DELETE'
   Future<Map<String, dynamic>> request(
     String method,
     String url, {
@@ -27,14 +27,14 @@ class ApiClient {
   }) async {
     final token = await _getToken();
     final uri = Uri.parse(url);
-    final headers = {
+    final headers = <String, String>{
       'Accept': 'application/json',
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer $token',
+      if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
     };
     final encoded = body == null ? null : jsonEncode(body);
 
-    final response = await _guard(switch (method) {
+    final response = await _guard(switch (method.toUpperCase()) {
       'GET' => http.get(uri, headers: headers),
       'POST' => http.post(uri, headers: headers, body: encoded),
       'PUT' => http.put(uri, headers: headers, body: encoded),
@@ -45,29 +45,41 @@ class ApiClient {
     return _handle(response);
   }
 
-  // ---------------- REQUEST MULTIPART (paket + file) ----------------
-  /// Selalu memakai POST (lihat penjelasan _method=PUT di backend).
+  // ---------------- REQUEST MULTIPART (paket + file / bytes) ----------------
   Future<Map<String, dynamic>> multipart(
     String url, {
     required Map<String, String> fields,
     File? file,
+    Uint8List? fileBytes,
     String fileField = 'image',
   }) async {
     final token = await _getToken();
 
-    // Jangan set Content-Type manual! http akan mengisi boundary otomatis.
     final request = http.MultipartRequest('POST', Uri.parse(url))
       ..headers.addAll({
         'Accept': 'application/json',
-        'Authorization': 'Bearer $token',
+        if (token != null && token.isNotEmpty) 'Authorization': 'Bearer $token',
       })
       ..fields.addAll(fields);
 
-    if (file != null) {
-      request.files.add(await http.MultipartFile.fromPath(fileField, file.path));
+    try {
+      if (kIsWeb && fileBytes != null) {
+        request.files.add(
+          http.MultipartFile.fromBytes(
+            fileField,
+            fileBytes,
+            filename: 'upload.jpg',
+          ),
+        );
+      } else if (file != null) {
+        request.files.add(
+          await http.MultipartFile.fromPath(fileField, file.path),
+        );
+      }
+    } on FileSystemException {
+      throw ApiException('File tidak bisa dibaca atau tidak ditemukan');
     }
 
-    // Upload foto butuh waktu lebih lama, jadi timeout 30 detik
     final response = await _guard(
       request.send().then(http.Response.fromStream),
       timeout: const Duration(seconds: 30),
@@ -78,25 +90,25 @@ class ApiClient {
 
   // ---------------- ALAT BANTU ----------------
 
-  /// Menunggu response dengan batas waktu + menangani error koneksi.
   Future<http.Response> _guard(
     Future<http.Response> future, {
     Duration timeout = const Duration(seconds: 15),
   }) async {
     try {
       return await future.timeout(timeout);
-    } on SocketException {
-      throw ApiException('Tidak ada koneksi atau server tidak terjangkau');
     } on TimeoutException {
       throw ApiException('Koneksi timeout, coba lagi');
+    } on SocketException {
+      throw ApiException('Tidak ada koneksi atau server tidak terjangkau');
+    } on http.ClientException {
+      // Di Flutter Web, error jaringan/CORS muncul sebagai ClientException
+      throw ApiException('Tidak ada koneksi atau server tidak terjangkau');
     }
   }
 
-  /// Membaca response dan menerjemahkan status code.
   Future<Map<String, dynamic>> _handle(http.Response response) async {
     final data = _decode(response);
 
-    // 2xx = sukses
     if (response.statusCode >= 200 && response.statusCode < 300) {
       return data;
     }
@@ -123,7 +135,10 @@ class ApiClient {
     if (response.body.isEmpty) return {};
     try {
       final data = jsonDecode(response.body);
-      return data is Map<String, dynamic> ? data : {};
+      if (data is Map<String, dynamic>) return data;
+      // Kalau root JSON berupa list, bungkus supaya datanya tidak hilang
+      if (data is List) return {'data': data};
+      return {};
     } on FormatException {
       throw ApiException('Response server tidak valid', response.statusCode);
     }

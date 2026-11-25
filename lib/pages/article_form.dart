@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart'; // Wajib untuk kIsWeb dan Uint8List
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import '../models/article_model.dart';
@@ -21,7 +22,9 @@ class _ArticleFormPageState extends State<ArticleFormPage> {
   final _service = ArticleService();
   final _picker = ImagePicker();
 
-  File? _pickedImage; // foto baru yang dipilih user
+  File? _pickedImageFile; // Untuk Android/iOS
+  Uint8List? _pickedImageBytes; // Khusus untuk Flutter Web
+
   bool _removeExisting = false; // user minta foto lama dibuang
   bool _loading = false;
 
@@ -31,7 +34,10 @@ class _ArticleFormPageState extends State<ArticleFormPage> {
   String? get _existingUrl =>
       _removeExisting ? null : widget.article?.imageUrl;
 
-  bool get _hasImage => _pickedImage != null || _existingUrl != null;
+  bool get _hasImage =>
+      _pickedImageFile != null ||
+      _pickedImageBytes != null ||
+      _existingUrl != null;
 
   @override
   void initState() {
@@ -63,10 +69,22 @@ class _ArticleFormPageState extends State<ArticleFormPage> {
       );
       if (picked == null) return; // user membatalkan
 
-      setState(() {
-        _pickedImage = File(picked.path);
-        _removeExisting = false;
-      });
+      if (kIsWeb) {
+        // Ambil bytes untuk Flutter Web
+        final bytes = await picked.readAsBytes();
+        setState(() {
+          _pickedImageBytes = bytes;
+          _pickedImageFile = null;
+          _removeExisting = false;
+        });
+      } else {
+        // Ambil File untuk Mobile (Android/iOS)
+        setState(() {
+          _pickedImageFile = File(picked.path);
+          _pickedImageBytes = null;
+          _removeExisting = false;
+        });
+      }
     } catch (_) {
       if (mounted) _showMessage('Gagal mengambil foto');
     }
@@ -102,7 +120,8 @@ class _ArticleFormPageState extends State<ArticleFormPage> {
 
   void _removeImage() {
     setState(() {
-      _pickedImage = null;
+      _pickedImageFile = null;
+      _pickedImageBytes = null;
       // Kalau artikel punya foto di server, tandai untuk dihapus
       _removeExisting = widget.article?.imageUrl != null;
     });
@@ -125,14 +144,16 @@ class _ArticleFormPageState extends State<ArticleFormPage> {
           widget.article!.id,
           title: title,
           content: content,
-          image: _pickedImage,
+          image: _pickedImageFile, // Mobile
+          imageBytes: _pickedImageBytes, // Web
           removeImage: _removeExisting,
         );
       } else {
         await _service.create(
           title: title,
           content: content,
-          image: _pickedImage,
+          image: _pickedImageFile, // Mobile
+          imageBytes: _pickedImageBytes, // Web
         );
       }
       if (!mounted) return;
@@ -150,8 +171,12 @@ class _ArticleFormPageState extends State<ArticleFormPage> {
   Widget _buildPreview() {
     Widget content;
 
-    if (_pickedImage != null) {
-      content = Image.file(_pickedImage!, fit: BoxFit.cover);
+    if (_pickedImageBytes != null) {
+      // Preview dari memory (Web)
+      content = Image.memory(_pickedImageBytes!, fit: BoxFit.cover);
+    } else if (_pickedImageFile != null) {
+      // Preview dari file (Mobile)
+      content = Image.file(_pickedImageFile!, fit: BoxFit.cover);
     } else if (_existingUrl != null) {
       content = Image.network(
         _existingUrl!,
