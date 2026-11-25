@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../services/api_exception.dart';
 import '../services/auth_service.dart';
-import 'home.dart';
+import '../widgets/auth_widgets.dart';
+import 'article_list.dart';
 import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
       if (!mounted) return;
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => const HomePage()),
+        MaterialPageRoute(builder: (_) => const ArticleListPage()),
       );
     } on ApiException catch (e) {
       if (mounted) _showMessage(e.message);
@@ -46,6 +47,11 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
+  void _goRegister() => Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const RegisterPage()),
+      );
+
   @override
   void dispose() {
     _emailC.dispose();
@@ -53,46 +59,122 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
+  Widget _social(Color color, String letter) {
+    return Container(
+      width: 36,
+      height: 36,
+      decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+      alignment: Alignment.center,
+      child: Text(
+        letter,
+        style: const TextStyle(
+            color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              controller: _emailC,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(labelText: 'Email'),
+      resizeToAvoidBottomInset: true,
+      body: AuthBackground(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(horizontal: 28),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Welcome!',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 36,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 48),
+                GlassField(
+                  controller: _emailC,
+                  hint: 'E-mail',
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 14),
+                GlassField(
+                  controller: _passC,
+                  hint: 'Password',
+                  obscure: true,
+                ),
+                const SizedBox(height: 14),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('Forgot password?',
+                        style: TextStyle(color: Colors.white, fontSize: 13)),
+                    InkWell(
+                      onTap: _loading ? null : _login,
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Sign In',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(width: 6),
+                          Container(
+                            width: 28,
+                            height: 28,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFE6F5C8),
+                              shape: BoxShape.circle,
+                            ),
+                            child: _loading
+                                ? const Padding(
+                                    padding: EdgeInsets.all(6),
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: Colors.black87,
+                                    ),
+                                  )
+                                : const Icon(Icons.arrow_forward,
+                                    size: 16, color: Colors.black87),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 48),
+                const Text('or sign up with',
+                    style: TextStyle(color: Colors.white, fontSize: 13)),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _social(const Color(0xFFDB4437), 'G'),
+                    const SizedBox(width: 16),
+                    _social(const Color(0xFF1877F2), 'f'),
+                    const SizedBox(width: 16),
+                    _social(const Color(0xFF4C75A3), 'VK'),
+                    const SizedBox(width: 14),
+                    Container(width: 1, height: 36, color: Colors.white38),
+                    const SizedBox(width: 14),
+                    OutlinedButton(
+                      onPressed: _goRegister,
+                      style: OutlinedButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        side: const BorderSide(color: Colors.white54),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20)),
+                      ),
+                      child: const Text('E-mail'),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            TextField(
-              controller: _passC,
-              obscureText: true,
-              decoration: const InputDecoration(labelText: 'Password'),
-            ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _loading ? null : _login,
-                child: _loading
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Text('Login'),
-              ),
-            ),
-            TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const RegisterPage()),
-              ),
-              child: const Text('Belum punya akun? Register'),
-            ),
-          ],
+          ),
         ),
       ),
     );

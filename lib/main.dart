@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/home.dart';
+import 'pages/article_list.dart';
 import 'pages/login_page.dart';
 import 'services/auth_service.dart';
 
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: isLoggedIn ? const HomePage() : const LoginPage(),
+      home: isLoggedIn ? const ArticleListPage() : const LoginPage(),
     );
   }
 }

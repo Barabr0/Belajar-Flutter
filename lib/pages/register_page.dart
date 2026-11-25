@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/api_exception.dart';
 import '../services/auth_service.dart';
+import '../widgets/auth_widgets.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -15,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passC = TextEditingController();
   final _auth = AuthService();
   bool _loading = false;
+  bool _accepted = false;
 
   void _showMessage(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
@@ -27,6 +29,10 @@ class _RegisterPageState extends State<RegisterPage> {
         _emailC.text.trim().isEmpty ||
         _passC.text.length < 8) {
       _showMessage('Lengkapi data, password minimal 8 karakter');
+      return;
+    }
+    if (!_accepted) {
+      _showMessage('Setujui kebijakan dan ketentuan terlebih dahulu');
       return;
     }
 
@@ -60,39 +66,92 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Register')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
+      body: AuthBackground(
+        child: Stack(
           children: [
-            TextField(
-              controller: _nameC,
-              decoration: const InputDecoration(labelText: 'Nama'),
-            ),
-            TextField(
-              controller: _emailC,
-              keyboardType: TextInputType.emailAddress,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: _passC,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Password (min 8 karakter)',
+            Positioned(
+              top: 12,
+              left: 16,
+              child: InkWell(
+                onTap: () => Navigator.pop(context),
+                borderRadius: BorderRadius.circular(20),
+                child: Container(
+                  width: 34,
+                  height: 34,
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.25),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.arrow_back,
+                      color: Colors.white, size: 18),
+                ),
               ),
             ),
-            const SizedBox(height: 24),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: _loading ? null : _register,
-                child: _loading
-                    ? const SizedBox(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(strokeWidth: 2),
-                      )
-                    : const Text('Register'),
+            Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 28),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      'Sign Up',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                    GlassField(controller: _nameC, hint: 'Your name'),
+                    const SizedBox(height: 14),
+                    GlassField(
+                      controller: _emailC,
+                      hint: 'Your e-mail',
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+                    const SizedBox(height: 14),
+                    GlassField(
+                      controller: _passC,
+                      hint: 'Create a password (min 8)',
+                      obscure: true,
+                    ),
+                    const SizedBox(height: 20),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text.rich(
+                            TextSpan(
+                              text: 'I accept ',
+                              style: const TextStyle(
+                                  color: Colors.white, fontSize: 13),
+                              children: const [
+                                TextSpan(
+                                  text: 'the policy and terms.',
+                                  style: TextStyle(
+                                      decoration: TextDecoration.underline),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Checkbox(
+                          value: _accepted,
+                          onChanged: (v) =>
+                              setState(() => _accepted = v ?? false),
+                          side: const BorderSide(color: Colors.white70),
+                          activeColor: const Color(0xFFA9C77A),
+                          checkColor: Colors.black87,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 28),
+                    GradientPillButton(
+                      label: 'Create Account',
+                      loading: _loading,
+                      onPressed: _loading ? null : _register,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
